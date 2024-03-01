@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://t7875af6nd45"]
+
+[ext_resource type="Script" path="res://scripts/DungeonController.cs" id="1_7no27"]
+
+[node name="TestMap" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+
+[node name="DungeonController" type="Node" parent="."]
+script = ExtResource("1_7no27")
