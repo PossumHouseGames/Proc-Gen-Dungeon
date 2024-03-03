@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://t7875af6nd45"]
+[gd_scene load_steps=8 format=3 uid="uid://t7875af6nd45"]
 
 [ext_resource type="Script" path="res://scripts/DungeonController.cs" id="1_7no27"]
+[ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="2_tbjsl"]
+[ext_resource type="Script" path="res://scripts/RoomShapeController.cs" id="3_n4lyu"]
+[ext_resource type="PackedScene" uid="uid://bop5cw80hr54n" path="res://scenes/tile_wall.tscn" id="3_u8r1l"]
+[ext_resource type="Resource" uid="uid://dyyfhdc412om8" path="res://data/room_shape_data/RoomShapeData_Cross_0.tres" id="4_py4ok"]
+[ext_resource type="PackedScene" uid="uid://cajpmlow0buxd" path="res://scenes/grid_tile.tscn" id="5_7h0k4"]
+[ext_resource type="PackedScene" uid="uid://b3jlohypbqbp4" path="res://scenes/tile_floor.tscn" id="6_5xc8f"]
 
 [node name="TestMap" type="Node3D"]
 
@@ -8,3 +14,42 @@
 
 [node name="DungeonController" type="Node" parent="."]
 script = ExtResource("1_7no27")
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("2_tbjsl")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.9, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+
+[node name="RoomShapeController" type="Node3D" parent="."]
+script = ExtResource("3_n4lyu")
+data = ExtResource("4_py4ok")
+gridTile = ExtResource("5_7h0k4")
+wallTile = ExtResource("3_u8r1l")
+floorTile = ExtResource("6_5xc8f")
+
+[node name="GridTile" parent="." instance=ExtResource("5_7h0k4")]
+
+[node name="NorthLabel" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 10)
+text = "North"
+font_size = 64
+
+[node name="WestLabel" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 10, 1, 0)
+text = "West"
+font_size = 64
+
+[node name="SouthLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+text = "South"
+font_size = 64
+
+[node name="EastLabel" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 1, 0)
+text = "East"
+font_size = 64

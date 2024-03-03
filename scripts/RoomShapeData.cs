@@ -5,9 +5,14 @@ using Grid = ToolShed.MazeGeneration.Grid;
 
 public partial class RoomShapeData : Resource
 {
+    [Export]
     public int numDoors;
+    [Export] 
     public RoomInstance.RoomShape shape;
+    [Export]
     public byte[] data;
+
+    [Export] public Texture2D roomImage;
     public Flattened2DArray<byte> shapeData;
     
     int neighborIndex = 0;
