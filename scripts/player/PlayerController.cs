@@ -13,6 +13,8 @@ public partial class PlayerController : Node3D
 	private Camera3D _myCam;
 	private Tween _tween;
 
+	private bool _isTweening => _tween != null && _tween.IsRunning();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -66,15 +68,18 @@ public partial class PlayerController : Node3D
 		var targetPos = new Vector3(-_myGridObject.position.X, 0, _myGridObject.position.Y);
 		_tween = CreateTween();
 		_tween.TweenProperty(this, "position", targetPos, 0.2f);
+		_tween.TweenCallback(Callable.From(SetTweenComplete));
 		GameDebug.Log($"Player at {_myGridObject.position}, facing {_myGridObject.faceDirection}");
+	}
+
+	private void SetTweenComplete()
+	{
+		GameDebug.Log("Position Tweening Finished");
 	}
 
 	private void SyncRotation()
 	{
-		var targetRot = Vector3.Up * _myGridObject.rotation;
-		SetRotationBeforeTween();
-
-		
+		var targetRot = SetRotationBeforeTween();
 		_tween = CreateTween();
 		_tween.TweenProperty(this, "rotation_degrees", targetRot, 0.2f);
 
@@ -82,8 +87,9 @@ public partial class PlayerController : Node3D
 		GameDebug.Log($"Player at {_myGridObject.position}, facing {_myGridObject.faceDirection}");
 	}
 
-	private void SetRotationBeforeTween()
+	private Vector3 SetRotationBeforeTween()
 	{
+		var beforeChange = RotationDegrees;
 		RotationDegrees = _myGridObject.rotation switch
 		{
 			270 when Math.Abs(RotationDegrees.Y - 0) < 0.002f => Vector3.Up * 360,
@@ -91,5 +97,17 @@ public partial class PlayerController : Node3D
 			0 when Mathf.Abs(RotationDegrees.Y - 270) < 0.002f => Vector3.Up * -90,
 			_ => RotationDegrees
 		};
+
+		var beforeTargetRotChange = _myGridObject.rotation;
+		Vector3 targetRot = _myGridObject.rotation switch	
+		{
+			270 when RotationDegrees.Y is >= -90 and <= 0 => Vector3.Up * -90,
+			0 when RotationDegrees.Y is >= 270 and <= 360 => Vector3.Up * 360,
+			_ => Vector3.Up * _myGridObject.rotation
+		};
+		
+		GameDebug.Log($"{(_isTweening ? "Mid" : "Before")} Tween Rotation Change from {beforeChange} to {RotationDegrees}, target from {beforeTargetRotChange} to {targetRot}");
+
+		return targetRot;
 	}
 }
