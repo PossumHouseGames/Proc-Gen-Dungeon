@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bop5cw80hr54n"]
+[gd_scene load_steps=3 format=3 uid="uid://bop5cw80hr54n"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0q6s"]
-albedo_color = Color(0, 0.494118, 0.498039, 1)
+[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_o1u32"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd1ko"]
+atlas = ExtResource("1_o1u32")
+region = Rect2(64, 32, 32, 32)
 
 [node name="Wall" type="Node3D"]
 
-[node name="Mesh" type="CSGBox3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
-size = Vector3(1, 1, 0.001)
-material = SubResource("StandardMaterial3D_g0q6s")
+pixel_size = 0.0313
+texture = SubResource("AtlasTexture_fd1ko")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.5)
+pixel_size = 0.0313
+texture = SubResource("AtlasTexture_fd1ko")

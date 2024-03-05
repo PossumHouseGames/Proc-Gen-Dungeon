@@ -110,7 +110,10 @@ public partial class RoomShapeImporterEditor : EditorScript
                     
                     
                     rsd.data = roomData.ToArray();
-                    rsd.shapeData.array = roomData.ToArray();
+                    rsd.shapeData = new Flattened2DArray<byte>(imageRoomSize.X, imageRoomSize.Y)
+                    {
+	                    array = roomData.ToArray()
+                    };
 
                     rsd.numDoors = roomData.Count(cell => cell == (byte)TileTypes.Door);
                     rsd.shape = r switch

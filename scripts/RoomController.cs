@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class RoomController : Node
+public partial class RoomController : Node3D
 {
     
 }
