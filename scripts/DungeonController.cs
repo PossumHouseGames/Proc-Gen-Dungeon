@@ -42,6 +42,8 @@ public partial class DungeonController : Node
 			seed = r.Next();
 		}
 		
+		ProcRandom = new Random(seed);
+
 		_currentRooms = new Flattened3DArray<RoomInstance>(5, 5, 4);
 		InitDungeonGrid();
 		InitRoomInstances();
@@ -108,7 +110,8 @@ public partial class DungeonController : Node
 					else if (cell.IsCrossCell())
 						targetShape = RoomInstance.RoomShape.Cross;
 
-					ri.RoomPrefab = _roomsList.GetRandomShape(ProcRandom, targetShape);
+					var randomRoom = _roomsList.GetRandomShape(ProcRandom, targetShape);
+					ri.RoomPrefab = randomRoom;
 					ri.rotation = cell.GetRotation();
                     
 					_currentRooms[column, level, row] = ri;
@@ -122,11 +125,12 @@ public partial class DungeonController : Node
 		for (int roomIndex = 0; roomIndex < _currentRooms.Length; roomIndex++)
         {
             (int x, int y, int z) cellCoord = _currentRooms.IndexToCoord(roomIndex);
-            var worldPosition = new Vector3(cellCoord.x * _roomSize.X, cellCoord.y * _roomSize.Y,
+            var worldPosition = new Vector3(-cellCoord.x * _roomSize.X, cellCoord.y * _roomSize.Y,
                 cellCoord.z * _roomSize.Z);
             ref var room = ref _currentRooms[roomIndex];
             room.RenderRoom(worldPosition);
-            room.controller.Name = $"({cellCoord.x},{cellCoord.y},{cellCoord.z})_{room.data.ResourceName.Replace("Room_", "")}_{room.controller.Name}";
+            room.controller.Name = $"({cellCoord.x},{cellCoord.y},{cellCoord.z})_{room.controller.Name}";
+            AddChild(room.controller);
             // room.controller.UpdateHalfWalls(cellCoord.y == 1);
             // room.controller._rotation = room.rotation;
             // switch ((RoomData.RoomFloor)cellCoord.y - 1)

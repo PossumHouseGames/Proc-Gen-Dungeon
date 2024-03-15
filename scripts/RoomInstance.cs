@@ -11,17 +11,15 @@ public struct RoomInstance
 
     public void RenderRoom(Vector3 worldPosition)
     {
-
-        // if (controller == null)
-        //     controller = GameObject.Instantiate(RoomPrefab, worldPosition, Quaternion.Euler(0, rotation, 0)).gameObject.AddComponent<RoomController>();
-        
-        // controller.transform.localRotation = Quaternion.Euler(0, rotation, 0);
-        // controller.PostGenerationHandler();
+        if (controller == null)
+            controller = new RoomController();
+        controller.Position = worldPosition;
+        controller.RotationDegrees = new Vector3(0, rotation, 0);
+        controller.AddChild(RoomPrefab);
     }
     
     public void DestroyRoom()
     {
-        if (controller != null)
-            controller.QueueFree();
+        controller?.QueueFree();
     }
 }

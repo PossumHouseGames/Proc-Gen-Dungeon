@@ -131,7 +131,7 @@ public partial class RoomShapeImporterEditor : EditorScript
                     rsc.Name = assetName.Replace("Data", "");
                     rsc.data = rsd;
                     rsc.Tiles = tileDatabase;
-                    rsc.Render();
+                    rsc.Editor_Render();
                     var ps = new PackedScene();
                     ps.Pack(rsc);
                     result = ResourceSaver.Save(ps, targetEndPath);

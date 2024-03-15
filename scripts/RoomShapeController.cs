@@ -10,13 +10,7 @@ public partial class RoomShapeController : Node3D
 
     public TileDatabase Tiles;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        Render();
-    }
-
-    public void Render()
+    public void Editor_Render()
     {
         int imageSize = Mathf.RoundToInt(Mathf.Sqrt(data.data.Length));
         data.shapeData = new Flattened2DArray<byte>(imageSize, imageSize)
@@ -35,6 +29,7 @@ public partial class RoomShapeController : Node3D
             GameDebug.LogError("Failed to find door Tile");
 
         int gridSize = (imageSize - 1) / 2;
+        Vector3I pivotOffset = new Vector3I(2, 0, -2);
         
         for (int rawX = 0; rawX < imageSize; rawX++)
         {
@@ -84,6 +79,7 @@ public partial class RoomShapeController : Node3D
                     var wall = wallTile.Instantiate();
                     tile.AddChild(wall);
                     wall.Owner = this;
+                    wall.Name += "_North";
                 }
 
                 if (northNeighborIsValid && northNeighborIsDoor)
@@ -91,6 +87,7 @@ public partial class RoomShapeController : Node3D
                     var door = doorTile.Instantiate();
                     tile.AddChild(door);
                     door.Owner = this;
+                    door.Name += "_North";
                 }
                 
                 // Check right
@@ -112,7 +109,7 @@ public partial class RoomShapeController : Node3D
                     wall.RotationDegrees = Vector3.Up * 270;
                     tile.AddChild(wall);
                     wall.Owner = this;
-
+                    wall.Name += "_East";
                 }
                 
                 if (eastNeighborIsValid && eastNeighborIsDoor)
@@ -121,6 +118,7 @@ public partial class RoomShapeController : Node3D
                     door.RotationDegrees = Vector3.Up * 270;
                     tile.AddChild(door);
                     door.Owner = this;
+                    door.Name += "_East";
 
                 }
                 
@@ -142,6 +140,7 @@ public partial class RoomShapeController : Node3D
                     wall.RotationDegrees = Vector3.Up * 90;
                     tile.AddChild(wall);
                     wall.Owner = this;
+                    wall.Name += "_West";
 
                 }
                 
@@ -151,6 +150,7 @@ public partial class RoomShapeController : Node3D
                     door.RotationDegrees = Vector3.Up * 90;
                     tile.AddChild(door);
                     door.Owner = this;
+                    door.Name += "_West";
 
                 }
                 
@@ -171,6 +171,8 @@ public partial class RoomShapeController : Node3D
                     wall.RotationDegrees = Vector3.Up * 180;
                     tile.AddChild(wall);
                     wall.Owner = this;
+                    wall.Name += "_South";
+
                 }
                 if (southNeighborIsValid && southNeighborIsDoor)
                 {
@@ -178,10 +180,11 @@ public partial class RoomShapeController : Node3D
                     door.RotationDegrees = Vector3.Up * 180;
                     tile.AddChild(door);
                     door.Owner = this;
+                    door.Name += "_South";
+
                 }
-                
 
-
+                tile.Position += pivotOffset;
             }
         }
     }

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://t7875af6nd45"]
+[gd_scene load_steps=5 format=3 uid="uid://t7875af6nd45"]
 
 [ext_resource type="Script" path="res://scripts/DungeonController.cs" id="1_7no27"]
+[ext_resource type="Resource" uid="uid://byqnpopsfs8fi" path="res://data/room_shape_list.tres" id="2_0i4ux"]
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="2_tbjsl"]
-[ext_resource type="Script" path="res://scripts/RoomShapeController.cs" id="3_n4lyu"]
-[ext_resource type="Resource" uid="uid://ct8vskt56xvl3" path="res://data/room_shape_data/RoomShapeData_Cross_4.tres" id="4_l0j4e"]
 [ext_resource type="PackedScene" uid="uid://cajpmlow0buxd" path="res://scenes/tiles/grid_tile.tscn" id="5_7h0k4"]
 
 [node name="TestMap" type="Node3D"]
@@ -12,6 +11,7 @@
 
 [node name="DungeonController" type="Node" parent="."]
 script = ExtResource("1_7no27")
+_roomsList = ExtResource("2_0i4ux")
 
 [node name="Player" type="Node3D" parent="."]
 script = ExtResource("2_tbjsl")
@@ -22,11 +22,6 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.9
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 visible = false
-
-[node name="RoomShapeController" type="Node3D" parent="."]
-script = ExtResource("3_n4lyu")
-data = ExtResource("4_l0j4e")
-gridTile = ExtResource("5_7h0k4")
 
 [node name="GridTile" parent="." instance=ExtResource("5_7h0k4")]
 
