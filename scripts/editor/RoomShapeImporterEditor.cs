@@ -8,14 +8,6 @@ using System.Linq;
 [Tool]
 public partial class RoomShapeImporterEditor : EditorScript
 {
-	public enum TileTypes
-	{
-		Empty = 0,
-		Wall = 1 << 0,
-		Door = 1 << 1,
-		Walkable = 1 << 2,
-	}
-
 	// Called when the script is executed (using File -> Run in Script Editor).
 	public override void _Run()
 	{
@@ -33,6 +25,9 @@ public partial class RoomShapeImporterEditor : EditorScript
 		int totalRows = shapes.GetHeight() / imageRoomSize.Y;
 		GD.Print($"Found {totalColumns} Columns and {totalRows} Rows in texture");
 		List<byte> roomData = new List<byte>();
+		var roomShapeList = new List<PackedScene>();
+		var tileDatabase = ResourceLoader.Load<TileDatabase>("res://data/tile_database.tres");
+		
 		for (int c = 0; c < totalColumns; c++)
         {
             for (int r = 0; r < totalRows; r++)
@@ -127,49 +122,27 @@ public partial class RoomShapeImporterEditor : EditorScript
                     };
                     rsd.roomImage = ImageTexture.CreateFromImage(roomImage);
                     var result = ResourceSaver.Save(rsd, assetPath);
+                    
+                    
+                    string targetPrefabPath = "res://scenes/room_shapes/";
+                    string targetEndPath = $"{targetPrefabPath}{assetName.Replace("Data", "")}.tscn";
 
-                    // var rsd = AssetDatabase.LoadAssetAtPath<RoomShapeData>(assetPath);
-                    // if (rsd == null)
-                    // {
-                    //     rsd = ScriptableObject.CreateInstance<RoomShapeData>();
-                    //     AssetDatabase.CreateAsset(rsd, assetPath);
-                    // }
-                    //
-                    // rsd.data = roomData.ToArray();
-                    // rsd.numDoors = roomData.Count(cell => cell == door);
-                    // rsd.shape = r switch
-                    // {
-                    //     0 => RoomInstance.RoomShape.Cross,
-                    //     1 => RoomInstance.RoomShape.T,
-                    //     2 => RoomInstance.RoomShape.I,
-                    //     3 => RoomInstance.RoomShape.L,
-                    //     4 => RoomInstance.RoomShape.End,
-                    //     _ => rsd.shape
-                    // };
-                    // EditorUtility.SetDirty(rsd);
-
-                    // // Load or create prefab
-                    // string defaultPrefabPath = "Assets/Prefabs/DefaultPrefabs/RoomShapeController.prefab";
-                    // string targetPrefabPath = $"Assets/Prefabs/RoomShapes/";
-                    // string targetEndPath = $"{targetPrefabPath}{assetName.Replace("Data", "")}.prefab";
-                    // var roomShapeController = AssetDatabase.LoadAssetAtPath<RoomShapeController>(targetEndPath);
-                    // if (roomShapeController == null)
-                    // {
-                    //     AssetDatabase.CopyAsset(defaultPrefabPath, targetEndPath);
-                    // }
-                    //
-                    // var rscPrefab = PrefabUtility.LoadPrefabContents(targetEndPath);
-                    // var rsc = rscPrefab.GetComponent<RoomShapeController>();
-                    // rsc.data = rsd;
-                    // rsc.Generate();
-                    // EditorUtility.SetDirty(rsc);
-                    // PrefabUtility.SaveAsPrefabAsset(rscPrefab, targetEndPath);
-                    // PrefabUtility.UnloadPrefabContents(rscPrefab);
+                    RoomShapeController rsc = new RoomShapeController();
+                    rsc.Name = assetName.Replace("Data", "");
+                    rsc.data = rsd;
+                    rsc.Tiles = tileDatabase;
+                    rsc.Render();
+                    var ps = new PackedScene();
+                    ps.Pack(rsc);
+                    result = ResourceSaver.Save(ps, targetEndPath);
+                    roomShapeList.Add(ps);
                 }
             }
         }
 
-
+		var rsList = ResourceLoader.Load<RoomsList>("res://data/room_shape_list.tres");
+		rsList._roomShapes = roomShapeList.ToArray();
+		ResourceSaver.Save(rsList, "res://data/room_shape_list.tres");
 	}
 }
 #endif

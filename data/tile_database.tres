@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="TileDatabase" load_steps=11 format=3 uid="uid://bfph217umryqn"]
+
+[ext_resource type="PackedScene" uid="uid://cajpmlow0buxd" path="res://scenes/tiles/grid_tile.tscn" id="1_mhjty"]
+[ext_resource type="Script" path="res://scripts/TileColor.cs" id="1_qgswn"]
+[ext_resource type="Script" path="res://scripts/TileDatabase.cs" id="1_ugnx2"]
+[ext_resource type="PackedScene" uid="uid://bop5cw80hr54n" path="res://scenes/tiles/tile_wall.tscn" id="3_lfseu"]
+[ext_resource type="PackedScene" uid="uid://cmy5pd2lvys2s" path="res://scenes/tiles/tile_door.tscn" id="4_by867"]
+[ext_resource type="PackedScene" uid="uid://b3jlohypbqbp4" path="res://scenes/tiles/tile_floor.tscn" id="5_v4jx2"]
+
+[sub_resource type="Resource" id="Resource_pwfqb"]
+script = ExtResource("1_qgswn")
+Name = ""
+TileType = 0
+Key = Color(0, 0, 0, 0)
+TileScene = ExtResource("1_mhjty")
+
+[sub_resource type="Resource" id="Resource_txg3q"]
+script = ExtResource("1_qgswn")
+Name = ""
+TileType = 1
+Key = Color(0, 0, 0, 1)
+TileScene = ExtResource("3_lfseu")
+
+[sub_resource type="Resource" id="Resource_yex0y"]
+script = ExtResource("1_qgswn")
+Name = ""
+TileType = 2
+Key = Color(1, 0, 0, 1)
+TileScene = ExtResource("4_by867")
+
+[sub_resource type="Resource" id="Resource_25h6r"]
+script = ExtResource("1_qgswn")
+Name = ""
+TileType = 4
+Key = Color(0, 1, 0, 1)
+TileScene = ExtResource("5_v4jx2")
+
+[resource]
+script = ExtResource("1_ugnx2")
+Tiles = [SubResource("Resource_pwfqb"), SubResource("Resource_txg3q"), SubResource("Resource_yex0y"), SubResource("Resource_25h6r")]

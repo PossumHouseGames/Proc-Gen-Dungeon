@@ -43,15 +43,17 @@ public partial class DungeonController : Node
 		}
 		
 		_currentRooms = new Flattened3DArray<RoomInstance>(5, 5, 4);
-
+		InitDungeonGrid();
+		InitRoomInstances();
+		InitRoomVisuals();
 	}
 
 	private void InitDungeonGrid()
 	{
 		dungeonGrid = new DungeonGrid(5, 5);
-		dungeonGrid.AddLevel(false);
-		dungeonGrid.AddLevel(false);
-		dungeonGrid.AddLevel(false);
+		// dungeonGrid.AddLevel(false);
+		// dungeonGrid.AddLevel(false);
+		// dungeonGrid.AddLevel(false);
 
 		// var basementStairsCellCoord = (2, 0, 1);
 		// var entryWayCellCoord = (2, 1, 0);

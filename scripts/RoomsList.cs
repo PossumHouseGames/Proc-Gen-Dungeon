@@ -2,13 +2,14 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+[GlobalClass, Tool]
 public partial class RoomsList : Resource
 {
     [Export] private RoomData[] _rooms;
-    [Export] private RoomShapeController[] _roomShapes;
+    [Export] public PackedScene[] _roomShapes;
     
     public RoomData[] Rooms => _rooms;
-    public RoomShapeController[] RoomShapes => _roomShapes;
+    public PackedScene[] RoomShapes => _roomShapes;
     
     public RoomData GetRandom(System.Random rng)
     {
@@ -17,8 +18,8 @@ public partial class RoomsList : Resource
     
     public RoomShapeController GetRandomShape(System.Random rng, RoomInstance.RoomShape targetShape)
     {
-        var roomGroup = _roomShapes.Where(rd => rd.data.shape == targetShape).ToList();
+        var roomGroup = _roomShapes.Where(rd => ((RoomShapeController)rd.Instantiate()).data.shape == targetShape).ToList();
 
-        return roomGroup.Count == 0 ? null :  roomGroup[rng.Next(0, roomGroup.Count)];
+        return roomGroup.Count == 0 ? null :  (RoomShapeController)roomGroup[rng.Next(0, roomGroup.Count)].Instantiate();
     }
 }

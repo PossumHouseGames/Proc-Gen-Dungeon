@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3jlohypbqbp4"]
 
-[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_3brqm"]
+[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_8edv4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wsuoi"]
-atlas = ExtResource("1_3brqm")
+atlas = ExtResource("1_8edv4")
 region = Rect2(0, 32, 32, 32)
 
 [node name="Floor" type="Node3D"]

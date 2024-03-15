@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmy5pd2lvys2s"]
 
-[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_8ok53"]
+[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_6jhic"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ol8t"]
-atlas = ExtResource("1_8ok53")
+atlas = ExtResource("1_6jhic")
 region = Rect2(32, 32, 32, 32)
 
 [node name="Door" type="Node3D"]

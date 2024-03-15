@@ -1,0 +1,159 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnl8g5a1olyrh"]
+
+[ext_resource type="Script" path="res://scripts/RoomShapeController.cs" id="1_qce2l"]
+[ext_resource type="Script" path="res://scripts/RoomShapeData.cs" id="2_2ynxy"]
+[ext_resource type="PackedScene" uid="uid://cajpmlow0buxd" path="res://scenes/tiles/grid_tile.tscn" id="3_nkamq"]
+[ext_resource type="PackedScene" uid="uid://bop5cw80hr54n" path="res://scenes/tiles/tile_wall.tscn" id="4_2ymqd"]
+[ext_resource type="PackedScene" uid="uid://b3jlohypbqbp4" path="res://scenes/tiles/tile_floor.tscn" id="5_vmojy"]
+[ext_resource type="PackedScene" uid="uid://cmy5pd2lvys2s" path="res://scenes/tiles/tile_door.tscn" id="6_tnh6o"]
+
+[sub_resource type="Image" id="Image_pq4ix"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 255, 255, 255, 255, 0, 255, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_w0atn"]
+image = SubResource("Image_pq4ix")
+
+[sub_resource type="Resource" id="Resource_mn6l8"]
+script = ExtResource("2_2ynxy")
+numDoors = 2
+shape = 3
+data = PackedByteArray(0, 0, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 1, 4, 0, 4, 0, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 4, 0, 4, 0, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 4, 0, 4, 0, 4, 0, 4, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+roomImage = SubResource("ImageTexture_w0atn")
+
+[node name="RoomShape_L_13" type="Node3D"]
+script = ExtResource("1_qce2l")
+data = SubResource("Resource_mn6l8")
+
+[node name="Tile_(0, 0, 4)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Wall" type="Node3D" parent="Tile_(0, 0, 4)" instance=ExtResource("4_2ymqd")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="Tile_(0, 0, 3)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Wall" type="Node3D" parent="Tile_(0, 0, 3)" instance=ExtResource("4_2ymqd")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="Tile_(0, 0, 2)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Wall" type="Node3D" parent="Tile_(0, 0, 2)" instance=ExtResource("4_2ymqd")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="Tile_(0, 0, 1)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Tile_(0, 0, 0)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+
+[node name="Tile_(-1, 0, 4)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="Floor" type="Node3D" parent="Tile_(-1, 0, 4)" instance=ExtResource("5_vmojy")]
+
+[node name="Wall" type="Node3D" parent="Tile_(-1, 0, 4)" instance=ExtResource("4_2ymqd")]
+
+[node name="Tile_(-1, 0, 3)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="Floor" type="Node3D" parent="Tile_(-1, 0, 3)" instance=ExtResource("5_vmojy")]
+
+[node name="Tile_(-1, 0, 2)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="Floor" type="Node3D" parent="Tile_(-1, 0, 2)" instance=ExtResource("5_vmojy")]
+
+[node name="Tile_(-1, 0, 1)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Wall" type="Node3D" parent="Tile_(-1, 0, 1)" instance=ExtResource("4_2ymqd")]
+
+[node name="Tile_(-1, 0, 0)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Tile_(-2, 0, 4)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="Floor" type="Node3D" parent="Tile_(-2, 0, 4)" instance=ExtResource("5_vmojy")]
+
+[node name="Door" type="Node3D" parent="Tile_(-2, 0, 4)" instance=ExtResource("6_tnh6o")]
+
+[node name="Tile_(-2, 0, 3)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+
+[node name="Floor" type="Node3D" parent="Tile_(-2, 0, 3)" instance=ExtResource("5_vmojy")]
+
+[node name="Tile_(-2, 0, 2)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="Floor" type="Node3D" parent="Tile_(-2, 0, 2)" instance=ExtResource("5_vmojy")]
+
+[node name="Tile_(-2, 0, 1)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="Wall" type="Node3D" parent="Tile_(-2, 0, 1)" instance=ExtResource("4_2ymqd")]
+
+[node name="Tile_(-2, 0, 0)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Tile_(-3, 0, 4)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
+
+[node name="Floor" type="Node3D" parent="Tile_(-3, 0, 4)" instance=ExtResource("5_vmojy")]
+
+[node name="Wall" type="Node3D" parent="Tile_(-3, 0, 4)" instance=ExtResource("4_2ymqd")]
+
+[node name="@Node3D@38711" type="Node3D" parent="Tile_(-3, 0, 4)" instance=ExtResource("4_2ymqd")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="Tile_(-3, 0, 3)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+
+[node name="Floor" type="Node3D" parent="Tile_(-3, 0, 3)" instance=ExtResource("5_vmojy")]
+
+[node name="Wall" type="Node3D" parent="Tile_(-3, 0, 3)" instance=ExtResource("4_2ymqd")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="Tile_(-3, 0, 2)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+
+[node name="Floor" type="Node3D" parent="Tile_(-3, 0, 2)" instance=ExtResource("5_vmojy")]
+
+[node name="Tile_(-3, 0, 1)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="Wall" type="Node3D" parent="Tile_(-3, 0, 1)" instance=ExtResource("4_2ymqd")]
+
+[node name="Tile_(-3, 0, 0)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="Tile_(-4, 0, 4)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="Tile_(-4, 0, 3)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
+
+[node name="Tile_(-4, 0, 2)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
+
+[node name="Floor" type="Node3D" parent="Tile_(-4, 0, 2)" instance=ExtResource("5_vmojy")]
+
+[node name="Wall" type="Node3D" parent="Tile_(-4, 0, 2)" instance=ExtResource("4_2ymqd")]
+
+[node name="Door" type="Node3D" parent="Tile_(-4, 0, 2)" instance=ExtResource("6_tnh6o")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="Tile_(-4, 0, 1)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+
+[node name="Wall" type="Node3D" parent="Tile_(-4, 0, 1)" instance=ExtResource("4_2ymqd")]
+
+[node name="Tile_(-4, 0, 0)" type="Node3D" parent="." instance=ExtResource("3_nkamq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)

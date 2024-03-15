@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bop5cw80hr54n"]
 
-[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_o1u32"]
+[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="1_rpehu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd1ko"]
-atlas = ExtResource("1_o1u32")
+atlas = ExtResource("1_rpehu")
 region = Rect2(64, 32, 32, 32)
 
 [node name="Wall" type="Node3D"]
@@ -11,9 +11,11 @@ region = Rect2(64, 32, 32, 32)
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
 pixel_size = 0.0313
+texture_filter = 0
 texture = SubResource("AtlasTexture_fd1ko")
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.5)
 pixel_size = 0.0313
+texture_filter = 0
 texture = SubResource("AtlasTexture_fd1ko")
