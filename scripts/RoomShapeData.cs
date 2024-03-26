@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using ProcGenDungeon.scripts;
 using ToolShed.Debug;
 using Grid = ToolShed.MazeGeneration.Grid;
 
@@ -34,10 +35,26 @@ public partial class RoomShapeData : Resource
     bool neighborIsWalkable => data[neighborIndex] == WALKABLE;
     bool neighbor2IsWalkable => neighbor2IsValid && data[neighborIndex2] == WALKABLE;
 
+    public void Init()
+    {
+        int imageSize = Mathf.RoundToInt(Mathf.Sqrt(data.Length));
+
+        shapeData = new Flattened2DArray<byte>(imageSize, imageSize)
+        {
+            array = data,
+        };
+    }
     public void RunGetRoomGrid()
     {
         var g = GetRoomGrid();
         GameDebug.Log(g.ToString());
+    }
+
+    public List<GridObject> GetRoomGridObjects()
+    {
+        var gridObjects = new List<GridObject>();
+        
+        return gridObjects;
     }
     
     public Grid GetRoomGrid()

@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://t7875af6nd45"]
+[gd_scene load_steps=7 format=3 uid="uid://t7875af6nd45"]
 
 [ext_resource type="Script" path="res://scripts/DungeonController.cs" id="1_7no27"]
 [ext_resource type="Resource" uid="uid://byqnpopsfs8fi" path="res://data/room_shape_list.tres" id="2_0i4ux"]
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="2_tbjsl"]
 [ext_resource type="PackedScene" uid="uid://cajpmlow0buxd" path="res://scenes/tiles/grid_tile.tscn" id="5_7h0k4"]
+[ext_resource type="Texture2D" uid="uid://bxcdmjku8ynlp" path="res://art/TowerofthePossumGod.png" id="5_xf2ks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkoyf"]
+atlas = ExtResource("5_xf2ks")
+region = Rect2(64, 0, 32, 32)
 
 [node name="TestMap" type="Node3D"]
 
@@ -15,6 +20,7 @@ _roomsList = ExtResource("2_0i4ux")
 
 [node name="Player" type="Node3D" parent="."]
 script = ExtResource("2_tbjsl")
+backwardsMoveSpeed = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.9, 0)
@@ -44,3 +50,27 @@ font_size = 64
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 1, 0)
 text = "East"
 font_size = 64
+
+[node name="Enemy" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3)
+pixel_size = 0.0313
+texture_filter = 0
+texture = SubResource("AtlasTexture_mkoyf")
+
+[node name="Enemy2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32023, 0.5, 3)
+pixel_size = 0.0313
+texture_filter = 0
+texture = SubResource("AtlasTexture_mkoyf")
+
+[node name="Enemy3" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32023, 0.5, 14.1292)
+pixel_size = 0.0313
+texture_filter = 0
+texture = SubResource("AtlasTexture_mkoyf")
+
+[node name="Enemy4" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32023, 0.5, 14.1292)
+pixel_size = 0.0313
+texture_filter = 0
+texture = SubResource("AtlasTexture_mkoyf")

@@ -13,8 +13,9 @@ public partial class DungeonController : Node
 	private Random ProcRandom;
 	private Flattened3DArray<RoomInstance> _currentRooms;
 	public DungeonGrid dungeonGrid;
+	public Grid dungeonDataGrid;
 	
-	[Export] Vector3 _roomSize = new(5, 2, 5);
+	[Export] Vector3I _roomSize = new(5, 2, 5);
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -44,7 +45,7 @@ public partial class DungeonController : Node
 		
 		ProcRandom = new Random(seed);
 
-		_currentRooms = new Flattened3DArray<RoomInstance>(5, 5, 4);
+		_currentRooms = new Flattened3DArray<RoomInstance>(5, 5, 1);
 		InitDungeonGrid();
 		InitRoomInstances();
 		InitRoomVisuals();
@@ -53,6 +54,8 @@ public partial class DungeonController : Node
 	private void InitDungeonGrid()
 	{
 		dungeonGrid = new DungeonGrid(5, 5);
+		dungeonDataGrid = new Grid(dungeonGrid.Rows * _roomSize.Z, dungeonGrid.Columns * _roomSize.X,
+			dungeonGrid.Levels * _roomSize.Y);
 		// dungeonGrid.AddLevel(false);
 		// dungeonGrid.AddLevel(false);
 		// dungeonGrid.AddLevel(false);
@@ -115,6 +118,9 @@ public partial class DungeonController : Node
 					ri.rotation = cell.GetRotation();
                     
 					_currentRooms[column, level, row] = ri;
+
+					var targetPositionOffset = new Vector3I(column * _roomSize.X, row * _roomSize.Z, level * _roomSize.Y);
+					dungeonDataGrid.AddSubgrid(ri.RoomPrefab.data.GetRoomGrid(), targetPositionOffset);
 				}
 			}
 		}

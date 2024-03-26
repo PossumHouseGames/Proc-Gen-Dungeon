@@ -16,7 +16,7 @@ public partial class GridManager : Node
 
     public void Init()
     {
-        grid = new Grid(5, 5);
+        grid = new Grid(100,100);
     }
 
     public void RegisterGridObject(ref GridObject gridObject, Vector2I position)
@@ -31,6 +31,8 @@ public partial class GridManager : Node
 
     public bool IsPositionValid(Vector2I position)
     {
+        return true;
+        
         return position.X >= 0 && position.X < grid.Columns &&
                position.Y >= 0 && position.Y < grid.Rows;
     }

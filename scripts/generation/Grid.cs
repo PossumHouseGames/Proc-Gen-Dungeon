@@ -19,6 +19,19 @@ namespace ToolShed.MazeGeneration
         public Grid(Grid<Cell> grid) : base(grid)
         {
         }
+
+        public void AddSubgrid(Grid subGrid, Vector3I targetPosition)
+        {
+            if (subGrid == null ||
+                targetPosition.X < 0 || targetPosition.X >= Columns ||
+                targetPosition.Z < 0 || targetPosition.Z >= Rows ||
+                targetPosition.Y < 0 || targetPosition.Y >= Levels)
+            {
+                return;
+            }
+            
+            
+        }
     }
     
     public class Grid<T> where T : Cell

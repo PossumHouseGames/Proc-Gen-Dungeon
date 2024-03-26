@@ -15,6 +15,8 @@ public partial class PlayerController : Node3D
 
 	private bool _isTweening => _tween != null && _tween.IsRunning();
 
+	[Export] public float backwardsMoveSpeed = 0.6f;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -32,14 +34,14 @@ public partial class PlayerController : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (_inputHandler.RotateLeft)
+		if (_inputHandler.RotateLeft && !_isTweening)
 		{
 			_myGridObject.RotateLeft();
 			// RotationDegrees = Vector3.Up * _myGridObject.rotation;
 
 			SyncRotation();
 		}
-		if (_inputHandler.RotateRight)
+		if (_inputHandler.RotateRight && !_isTweening)
 		{
 			_myGridObject.RotateRight();
 			//RotationDegrees = Vector3.Up * _myGridObject.rotation;
@@ -47,27 +49,27 @@ public partial class PlayerController : Node3D
 			SyncRotation();
 		}
 
-		if (_inputHandler.MoveForward)
+		if (_inputHandler.MoveForward && !_isTweening)
 		{
 			_myGridObject.MoveForward();
 			// Position = new Vector3(-_myGridObject.position.X, 0, _myGridObject.position.Y); 
 
 			SyncPosition();
 		}
-		if (_inputHandler.MoveBack)
+		if (_inputHandler.MoveBack && !_isTweening)
 		{
 			_myGridObject.MoveBack();
 			// Position = new Vector3(-_myGridObject.position.X, 0, _myGridObject.position.Y); 
 			
-			SyncPosition();
+			SyncPosition(backwardsMoveSpeed);
 		}
 	}
 
-	private void SyncPosition()
+	private void SyncPosition(float duration = 0.2f)
 	{
 		var targetPos = new Vector3(-_myGridObject.position.X, 0, _myGridObject.position.Y);
 		_tween = CreateTween();
-		_tween.TweenProperty(this, "position", targetPos, 0.2f);
+		_tween.TweenProperty(this, "position", targetPos, duration);
 		_tween.TweenCallback(Callable.From(SetTweenComplete));
 		GameDebug.Log($"Player at {_myGridObject.position}, facing {_myGridObject.faceDirection}");
 	}
